@@ -79,7 +79,9 @@
     account.getBalance();
     account.deposit(2000);
     account.withdrawal(5000);
+    account.withdrawal(7000);
     account.accountError("test");
     account.getBalance();
     account.exitAccount();
               
+
