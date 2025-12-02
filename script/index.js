@@ -27,61 +27,100 @@
 //this function should exit the account
 //HINT: there are a few different ways to do this, it's up to you which way you choose.
 
+// HINT:  
+//these operators could probably be useful in this assignment:  
+//&& operator  
+//|| operator  
 
-// Skap kontot (objektet)
+//to handle one of the potential errors you can use this built in method isNaN(), this is how you use it:  
+//const variableName = 10;  
+//isNaN(variableName);  
+
+
+
+        // Skap kontot (objektet)
     const account = {
     accountName: "Emily Unsworth",
     balance: 7000,
-    };
+    
+        // Visa kontoinnehavarens namn
+    getAccountName: function () {
+        alert("Kontoinnehavarens namn är: " + this.accountName);
+    },
 
-// Visa kontoinnehavarens namn
-    account.getAccountName = function () {
-        alert(`Kontoinnehavarens namn är: ${this.accountName}`);
-    };
+        // Visa saldot
+    getBalance: function () {
+        alert("Beloppet på ditt kontot är: " + this.balance + "kr");
+    },
 
-// Visa saldot
-
-    account.getBalance = function () {
-        alert(`Beloppet på ditt kontot är: ${this.balance} kr`);
-    };
-
-// Göra en insättning
-    account.deposit = function (amount) {
+        // Göra en insättning
+    deposit: function (amount) {
         if (amount > 0) {
             this.balance += amount;
-            alert(`Du har gjort en insättning på: ${amount} kr. Beloppet på kontot är nu: ${this.balance} kr`);
-        }};
+            alert("Du har gjort en insättning på: " + amount + "kr. Beloppet på kontot är nu: " + this.balance + "kr");
+        }},
 
 
-// Göra ett uttag
-    account.withdrawal = function (amount) {
-        if (amount > 0 && amount <= this.balance) {
-            this.balance -= amount;
-            alert(`Du har gjort ett uttag på: ${amount} kr. Beloppet på kontot är nu: ${this.balance} kr`);
+        // Göra ett uttag
+    withdrawal: function (amount) {
+        if (amount > this.balance) {
+            this.accountError("Ogiltigt förfrågan: Otillräckligt saldo för uttag, testa igen med ett lägre belopp.");
         } 
         else {
-            this.accountError("uttag");
-    }};
+            this.balance -= amount;
+            alert("Du har gjort ett uttag på: " + amount + "kr. Beloppet på kontot är nu: " + this.balance + "kr");
+    }},
 
-// Hantera fel, så som ogiltigt belopp
-    account.accountError = function (action) {
-        alert(`Error: Ogiltigt belopp ${action}. Testa igen med ett nytt belopp.`);
-    };
+        // Hantera kontofel
+    accountError: function (message) {
+        alert("Felmeddelande: " + message);
+    },
 
-// Avsluta kontot
-    account.exitAccount = function () {
+        // Avsluta kontot
+    exitAccount: function () {
         alert("Nu har du loggat ut. Tack för att du är kund hos oss!");
-    };
+    },
+    }
 
-
-// Användning av kontot      
-    account.getAccountName();
-    account.getBalance();
-    account.deposit(2000);
-    account.withdrawal(5000);
-    account.withdrawal(7000);
-    account.accountError("test");
-    account.getBalance();
-    account.exitAccount();
               
+
+
+    function atm() {
+    const message= parseFloat(
+    prompt( "Select a choise 1.) See balance 2.) Make a deposit 3.) Make a withdrawal 4.) Get account name 5.) Exit"
+    )
+    );
+
+    switch (message) {
+        case 1:
+            account.getBalance();
+           break;
+
+        case 2:
+            const depositAmount = parseFloat(prompt("Enter deposit amount:"));
+            account.deposit(depositAmount);
+            break;
+
+        case 3:
+            const withdrawalAmount = parseFloat(prompt("Enter withdrawal amount:"));
+            account.withdrawal(withdrawalAmount);
+            break;
+
+        case 4:
+            account.getAccountName();
+            break;
+
+        case 5:
+            account.exitAccount();
+            break;
+            
+        default:
+            alert("Ogiltigt val . Försök på nytt!");
+        }
+    }
+
+
+
+
+
 
