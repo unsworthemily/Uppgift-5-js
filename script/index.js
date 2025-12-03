@@ -39,7 +39,7 @@
 
 
         // Skap kontot (objektet)
-    const account = {
+const account = {
     accountName: "Emily Unsworth",
     balance: 7000,
     
@@ -54,17 +54,26 @@
     },
 
         // Göra en insättning
-    deposit: function (amount) {
-        if (amount > 0) {
+    deposit: function (amount) { 
+        if (isNaN(amound))|| (amount <= 0) {
+            this.accountError("insättning");
+            return;
+        }
             this.balance += amount;
             alert("Du har gjort en insättning på: " + amount + "kr. Beloppet på kontot är nu: " + this.balance + "kr");
-        }},
+        },
 
 
         // Göra ett uttag
     withdrawal: function (amount) {
+        if (isNaN(amound))|| (amount <= 0){
+            this.accountError("Ogiltigt förfrågan: Testa igen!");
+            return;
+        }
+
         if (amount > this.balance) {
             this.accountError("Ogiltigt förfrågan: Otillräckligt saldo för uttag, testa igen med ett lägre belopp.");
+            return;
         } 
         else {
             this.balance -= amount;
@@ -84,30 +93,41 @@
 
               
 
-
+//ATM
     function atm() {
-    const message= parseFloat(
-    prompt( "Select a choise 1.) See balance 2.) Make a deposit 3.) Make a withdrawal 4.) Get account name 5.) Exit"
-    )
-    );
 
-    switch (message) {
+        let isRunning = true;
+        
+        while (isRunning) {
+
+            const val= promt(
+                "Välj ett alternativ:/n" +
+                "1.) Se saldo/n" +
+                "2.) Göra en insättning/n" +
+                "3.) Göra ett uttag/n" +
+                "4.) Få kontoinnehavarens namn/n" +
+                "5.) Logga ut"
+            );
+        
+
+    switch (val) {
         case 1:
             account.getBalance();
            break;
 
         case 2:
-            const depositAmount = parseFloat(prompt("Enter deposit amount:"));
+            const depositAmount = parseFloat(prompt("Ange det belopp du vill sätta in:"));
             account.deposit(depositAmount);
             break;
 
         case 3:
-            const withdrawalAmount = parseFloat(prompt("Enter withdrawal amount:"));
+            const withdrawalAmount = parseFloat(prompt("Ange det belopp du vill ta ut:"));
             account.withdrawal(withdrawalAmount);
             break;
 
         case 4:
             account.getAccountName();
+            isRunning = false; //avslutar loopen
             break;
 
         case 5:
@@ -115,9 +135,11 @@
             break;
             
         default:
-            alert("Ogiltigt val . Försök på nytt!");
+            accountError()
+            alert("Nu vart något fel! Försök igen!");
+            break;
         }
-    }
+    }}
 
 
 
