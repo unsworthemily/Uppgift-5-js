@@ -55,7 +55,7 @@ const account = {
 
         // Göra en insättning
     deposit: function (amount) { 
-        if (isNaN(amound))|| (amount <= 0) {
+        if (isNaN(amount)|| amount <= 0) {
             this.accountError("insättning");
             return;
         }
@@ -66,7 +66,7 @@ const account = {
 
         // Göra ett uttag
     withdrawal: function (amount) {
-        if (isNaN(amound))|| (amount <= 0){
+        if (isNaN(amount)|| amount <= 0){
             this.accountError("Ogiltigt förfrågan: Testa igen!");
             return;
         }
@@ -100,14 +100,14 @@ const account = {
         
         while (isRunning) {
 
-            const val= promt(
-                "Välj ett alternativ:/n" +
-                "1.) Se saldo/n" +
-                "2.) Göra en insättning/n" +
-                "3.) Göra ett uttag/n" +
-                "4.) Få kontoinnehavarens namn/n" +
+            const val= parseFloat(prompt(
+                "Välj ett alternativ:\n" +;
+                "1.) Se saldo\n" +
+                "2.) Göra en insättning\n" +
+                "3.) Göra ett uttag\n" +
+                "4.) Få kontoinnehavarens namn\n" +
                 "5.) Logga ut"
-            );
+             ) );
         
 
     switch (val) {
@@ -127,11 +127,12 @@ const account = {
 
         case 4:
             account.getAccountName();
-            isRunning = false; //avslutar loopen
+            
             break;
 
         case 5:
             account.exitAccount();
+            isRunning = false; //avslutar loopen
             break;
             
         default:
@@ -141,7 +142,7 @@ const account = {
         }
     }}
 
-
+atm();  
 
 
 
