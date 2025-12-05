@@ -101,7 +101,7 @@ const account = {
         while (isRunning) {
 
             const val= parseFloat(prompt(
-                "Välj ett alternativ:\n" +;
+                "Välj ett alternativ:\n" +
                 "1.) Se saldo\n" +
                 "2.) Göra en insättning\n" +
                 "3.) Göra ett uttag\n" +
